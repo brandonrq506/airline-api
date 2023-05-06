@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const countrySchema = new mongoose.Schema({
+const countrySchema = new Schema({
     name: { type: String, required: true }
 });
 
