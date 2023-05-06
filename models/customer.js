@@ -15,16 +15,18 @@ const customerSchema = new mongoose.Schema({
     refreshToken: String
 },
     {
-        virtuals: {
-            fullname: {
-                get() { return this.first_name + " " + this.last_name; }
-            },
-            age: {
-                get() { return (new Date()).getFullYear() - this.dob.getFullYear(); }
-            }
-        }
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
 );
+
+customerSchema.virtual("fullname").get(function () {
+    return this.first_name + " " + this.last_name;
+});
+
+customerSchema.virtual("age").get(function () {
+    return (new Date()).getFullYear() - this.dob.getFullYear();
+});
 
 const Customer = mongoose.model("Customer", customerSchema);
 export default Customer;
