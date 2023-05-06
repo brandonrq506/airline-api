@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
 //Flight Schedule
-const scheduleSchema = new mongoose.Schema({
-    route: { type: mongoose.Schema.Types.ObjectId, ref: "Route", required: true },
+const scheduleSchema = new Schema({
+    route: { type: Schema.Types.ObjectId, ref: "Route", required: true },
     departure: { type: Date, required: true },
     status: { type: String, required: true, enum: ["DELAYED", "ON TIME", "DEPARTED", "ARRIVED", "CANCELED"] },
 },

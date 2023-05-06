@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const customerSchema = new mongoose.Schema({
+const customerSchema = new Schema({
     first_name: { type: String, required: true, lowercase: true, trim: true },
     last_name: { type: String, required: true, lowercase: true, trim: true },
     password: { type: String, required: true, trim: true, minLength: 12 },
