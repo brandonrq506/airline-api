@@ -18,6 +18,24 @@ const getCustomerById = async (id) => {
     }
 }
 
+const getCustomerByEmail = async (email) => {
+    try {
+        const customer = await Customer.findOne({ email }).exec();
+        return customer;
+    } catch (error) {
+        throw error;
+    }
+}
+
+const addCustomer = async (customer) => {
+    try {
+        const newCustomer = await Customer.create(customer);
+        return newCustomer;
+    } catch (error) {
+        throw error;
+    }
+}
+
 const updateCustomer = async (id, customer) => {
     try {
         const newCustomer = await Customer.findByIdAndUpdate(id, customer,
@@ -44,6 +62,8 @@ const deleteCustomer = async (id) => {
 export default {
     getAllCustomers,
     getCustomerById,
+    getCustomerByEmail,
+    addCustomer,
     updateCustomer,
     deleteCustomer
 }
