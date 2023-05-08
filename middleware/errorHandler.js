@@ -7,6 +7,7 @@ const errorHandler = (err, req, res, next) => {
     const message = err.message || 'Something went wrong';
     //Log the error here
 
+
     res.status(status).json({ message });
 }
 
