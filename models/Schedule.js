@@ -14,7 +14,9 @@ const scheduleSchema = new Schema({
 );
 
 scheduleSchema.virtual("arrival").get(function () {
-    return new Date(this.departure.getTime + (this.route.duration * 60 * 1000));
+    const duration = this.route.duration; //in minutes
+    const durationMili = duration * 60 * 1000
+    return new Date(this.departure.getTime + durationMili);
 });
 
 const Schedule = mongoose.model("Schedule", scheduleSchema);
