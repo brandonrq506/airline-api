@@ -3,12 +3,12 @@ import { capitalize } from "../helpers/utils.js";
 const { Schema } = mongoose;
 
 const customerSchema = new Schema({
-    first_name: { type: String, required: true, trim: true },
-    last_name: { type: String, required: true, trim: true },
+    firstName: { type: String, required: true, trim: true },
+    lastName: { type: String, required: true, trim: true },
     password: { type: String, required: true, trim: true, minLength: 12 },
-    phone_number: { type: String, minLength: 8, maxLength: 15 },
+    phoneNumber: { type: String, minLength: 8, maxLength: 15 },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    dob: { type: Date, required: true, min: () => new Date().setFullYear(new Date().getFullYear() - 18) },
+    dob: { type: Date, required: true, max: () => new Date().setFullYear(new Date().getFullYear() - 18) },
     roles: {
         User: { type: Number, default: 1 },
         Editor: Number,
@@ -23,12 +23,13 @@ const customerSchema = new Schema({
 );
 
 customerSchema.virtual("fullname").get(function () {
-    const fullName = this.first_name + " " + this.last_name;
+    const fullName = this.firstName + " " + this.lastName;
     return capitalize(fullName);
 });
 
+//To do: This does not get the year propertly as does not consider months.
 customerSchema.virtual("age").get(function () {
-    return (new Date()).getFullYear() - this.dob.getFullYear();
+    return new Date().getFullYear() - this.dob.getFullYear();
 });
 
 const Customer = mongoose.model("Customer", customerSchema);
