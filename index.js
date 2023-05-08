@@ -1,4 +1,5 @@
 import errorHandler from "./middleware/errorHandler.js";
+import v1Routes from "./routes/v1-routes.js";
 import { corsOptions } from "./config/cors.js";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
@@ -19,9 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-app.get('/api/v1', (req, res) => {
-    res.send('Hello to Memories API');
-});
+app.use('/api/v1', v1Routes);
 
 
 app.use(errorHandler);
