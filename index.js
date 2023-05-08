@@ -1,4 +1,5 @@
 import errorHandler from "./middleware/errorHandler.js";
+import credentials from './middleware/credentials.js'
 import v1Routes from "./routes/v1-routes.js";
 import { corsOptions } from "./config/cors.js";
 import cookieParser from "cookie-parser";
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 3500;
 
 
 //Middlewares
+app.use(credentials); //Use before CORS
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

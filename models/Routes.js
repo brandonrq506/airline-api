@@ -7,7 +7,7 @@ const routeSchema = new Schema({
     destination: { type: Schema.Types.ObjectId, ref: "Airport", required: true },
     distance: { type: Number, required: true },     // in km
     duration: { type: Number, required: true },     // in minutes
-    base_fare: { type: Number, required: true },    // in USD
+    baseFare: { type: Number, required: true },    // in USD
     fares: [Fare]
 });
 
