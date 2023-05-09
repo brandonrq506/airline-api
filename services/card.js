@@ -20,7 +20,7 @@ const getCardById = async (id) => {
 
 const getCustomerCards = async (id) => {
     try {
-        const cards = await Card.find({ customerId: id }).lean().exec();
+        const cards = await Card.find({ customer: id }).lean().exec();
         return cards;
     } catch (error) {
         throw error;
@@ -29,7 +29,7 @@ const getCustomerCards = async (id) => {
 
 const addCard = async (card) => {
     try {
-        const newCard = await Card.create(card).exec();
+        const newCard = await Card.create(card);
         return newCard;
     } catch (error) {
         throw error;
