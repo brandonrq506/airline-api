@@ -19,8 +19,7 @@ export const getCard = async (req, res, next) => {
 
 export const getCustomerCards = async (req, res, next) => {
     const customerId = req.params.id;
-    console.log(customerId);
-    const cards = await cardService.getCustomerCards(customerId);
+    const cards = await cardService.getCardsByCustomerId(customerId);
     res.status(200).json(cards);
 }
 
