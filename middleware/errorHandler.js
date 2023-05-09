@@ -5,8 +5,8 @@
 const errorHandler = (err, req, res, next) => {
     const status = err.status || 500;
     const message = err.message || 'Something went wrong';
-    //Log the error here
-    
+    //To do: Log the error here (Research Morgan, Winston or Sentry)
+
     res.status(status).json({ message });
 }
 
