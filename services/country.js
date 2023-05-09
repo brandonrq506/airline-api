@@ -1,6 +1,6 @@
 import Country from "../models/Country.js";
 
-export const getAllCountries = async () => {
+const getAllCountries = async () => {
     try {
         const countries = await Country.find().lean().exec();
         return countries;
@@ -9,7 +9,7 @@ export const getAllCountries = async () => {
     }
 };
 
-export const getCountryById = async (countryId) => {
+const getCountryById = async (countryId) => {
     try {
         const country = await Country.findById(countryId).lean().exec();
         return country;
@@ -18,7 +18,7 @@ export const getCountryById = async (countryId) => {
     }
 };
 
-export const createCountry = async (country) => {
+const createCountry = async (country) => {
     try {
         const newCountry = await Country.create(country);
         return newCountry;
@@ -27,7 +27,7 @@ export const createCountry = async (country) => {
     }
 };
 
-export const updateCountry = async (countryId, country) => {
+const updateCountry = async (countryId, country) => {
     try {
         const newCountry = await Country.findByIdAndUpdate(countryId, country,
             {
@@ -41,7 +41,7 @@ export const updateCountry = async (countryId, country) => {
     }
 };
 
-export const deleteCountry = async (countryId) => {
+const deleteCountry = async (countryId) => {
     try {
         const country = await Country.findByIdAndRemove(countryId).exec();
         return country;

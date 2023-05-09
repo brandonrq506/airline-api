@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const cardSchema = new Schema({
-    number: { type: String, required: true, minlength: 16, maxlength: 19 },
+    number: { type: String, required: true, minlength: 16, maxlength: 19, unique: true },
     issuer: { type: String, enum: ["Visa", "MasterCard", "American Express", "Discover"], required: true },
     type: { type: String, enum: ["Credit", "Debit"], required: true },
     balance: { type: Number, required: true, min: 0 },
