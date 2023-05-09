@@ -20,7 +20,16 @@ const getCustomerById = async (id) => {
 
 const getCustomerByEmail = async (email) => {
     try {
-        const customer = await Customer.findOne({ email }).exec();
+        const customer = await Customer.findOne({ email: email }).exec();
+        return customer;
+    } catch (error) {
+        throw error;
+    }
+}
+
+const getCustomerByToken = async (refreshToken) => {
+    try {
+        const customer = await Customer.findOne({ refreshToken: refreshToken }).exec();
         return customer;
     } catch (error) {
         throw error;
@@ -63,6 +72,7 @@ export default {
     getAllCustomers,
     getCustomerById,
     getCustomerByEmail,
+    getCustomerByToken,
     addCustomer,
     updateCustomer,
     deleteCustomer
