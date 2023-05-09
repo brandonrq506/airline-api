@@ -18,7 +18,7 @@ const getCardById = async (id) => {
     }
 }
 
-const getCustomerCards = async (id) => {
+const getCardsByCustomerId = async (id) => {
     try {
         const cards = await Card.find({ customer: id }).lean().exec();
         return cards;
@@ -64,7 +64,7 @@ const deleteCard = async (id) => {
 export default {
     getAllCards,
     getCardById,
-    getCustomerCards,
+    getCardsByCustomerId,
     addCard,
     updateCard,
     deleteCard
