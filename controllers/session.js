@@ -4,6 +4,7 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import createError from '../helpers/errorHelpers.js';
 import customerService from "../services/customer.js";
 import { compare, hash } from "bcrypt";
+import Jwt from "jsonwebtoken";
 
 
 export const register = asyncHandler(async (req, res, next) => {
@@ -37,7 +38,9 @@ export const login = asyncHandler(async (req, res, next) => {
     const accessToken = getAccessToken(user);
     const refreshToken = getRefreshToken(user);
 
-    await customerService.updateCustomer(user._id, { ...user, refreshToken });
+    const updatedUserData = { ...user.toObject(), refreshToken }
+    await customerService.updateCustomer(user._id, updatedUserData);
+
     if (process.env.NODE_ENV === 'production')
         res.cookie('jwt', refreshToken, prodCookie);
     else
@@ -47,8 +50,49 @@ export const login = asyncHandler(async (req, res, next) => {
 });
 
 
-export const refresh = asyncHandler(async (req, res, next) => { });
+export const refresh = asyncHandler(async (req, res, next) => {
+    const cookies = req.cookies
+
+    if (!cookies?.jwt)
+        return next(createError(401, 'Unauthorized'));
+
+    const foundUser = await customerService.getCustomerByToken(cookies.jwt);
+    if (!foundUser)
+        return next(createError(403, 'Forbidden'));
+
+    Jwt.verify(
+        cookies.jwt,
+        process.env.REFRESH_TOKEN,
+        async (err, decoded) => {
+            if (err)
+                return next(createError(403, 'Forbidden'));
+
+            const accessToken = getAccessToken(foundUser);
+            res.json({ accessToken });
+        }
+    );
+});
 
 
 
-export const logout = asyncHandler(async (req, res, next) => { });
+export const logout = asyncHandler(async (req, res, next) => {
+    //To do: On cliente delete access Token
+    const cookies = req.cookies
+
+    if (!cookies?.jwt)
+        return res.sendStatus(204);
+
+    const foundUser = await customerService.getCustomerByToken(cookies.jwt);
+    if (!foundUser)
+        return res.sendStatus(204);
+
+    const updatedUserData = { ...foundUser.toObject(), refreshToken: '' }
+    await customerService.updateCustomer(foundUser._id, updatedUserData);
+
+    if (process.env.NODE_ENV === 'production')
+        res.clearCookie('jwt', prodCookie);
+    else
+        res.clearCookie('jwt', devCookie);
+
+    res.sendStatus(204);
+});
