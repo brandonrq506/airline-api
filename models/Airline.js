@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
-const airlineSchema = Schema({
+const airlineSchema = new Schema({
     name: { type: String, required: true, unique: true },
 });
 
