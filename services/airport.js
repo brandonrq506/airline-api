@@ -18,6 +18,15 @@ const getAirportById = async (id) => {
     }
 };
 
+const getAirportsbyCountryId = async (countryId) => {
+    try {
+        const airports = await Airport.find({ country: countryId }).lean().exec();
+        return airports;
+    } catch (error) {
+        throw error;
+    }
+}
+
 const createAirport = async (airport) => {
     try {
         const newAirport = await Airport.create(airport);
@@ -54,6 +63,7 @@ const deleteAirport = async (id) => {
 export default {
     getAllAirports,
     getAirportById,
+    getAirportsbyCountryId,
     createAirport,
     updateAirport,
     deleteAirport
