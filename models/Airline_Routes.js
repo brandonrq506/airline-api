@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
-const airlineRouteSchema = Schema({
+const airlineRouteSchema = new Schema({
     airline: { type: Schema.Types.ObjectId, ref: "Airline", required: true },
     route: { type: Schema.Types.ObjectId, ref: "Route", required: true }
 });
