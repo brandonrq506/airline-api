@@ -27,11 +27,17 @@ export const updateCountry = asyncHandler(async (req, res, next) => {
     const countryId = req.params.id;
     const country = req.body;
     const updatedCountry = await countryService.updateCountry(countryId, country);
+    if (!updatedCountry)
+        return next(createError(404, `Country not found`));
+
     res.status(200).json(updatedCountry);
 });
 
 export const deleteCountry = asyncHandler(async (req, res, next) => {
     const countryId = req.params.id;
     const deletedCountry = await countryService.deleteCountry(countryId);
-    res.status(200).json(deletedCountry);
+    if (!deletedCountry)
+        return next(createError(404, `Country not found`));
+
+    res.sendStatus(200);
 });
