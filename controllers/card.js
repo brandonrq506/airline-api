@@ -17,7 +17,7 @@ export const getCard = async (req, res, next) => {
     res.status(200).json(card);
 }
 
-export const getCustomerCards = async (req, res, next) => {
+export const getCardsByCustomerId = async (req, res, next) => {
     const customerId = req.params.id;
     const cards = await cardService.getCardsByCustomerId(customerId);
     res.status(200).json(cards);
@@ -33,11 +33,16 @@ export const updateCard = async (req, res, next) => {
     const cardId = req.params.id;
     const card = req.body;
     const updatedCard = await cardService.updateCard(cardId, card);
+    if (!updatedCard)
+        return next(createError(404, `Card not found`));
+
     res.status(200).json(updatedCard);
 }
 
 export const deleteCard = async (req, res, next) => {
     const cardId = req.params.id;
     const deletedCard = await cardService.deleteCard(cardId);
-    res.status(200).json(deletedCard);
+    if (!deletedCard)
+        return next(createError(404, `Card not found`));
+    res.sendStatus(200);
 }
