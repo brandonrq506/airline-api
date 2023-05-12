@@ -32,6 +32,6 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.log(err));
 
 /*
-Add custome error message to Schema validation.
+Add customer error message to Schema validation.
 
 */

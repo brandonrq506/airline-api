@@ -1,6 +1,6 @@
 import Airline from '../models/airline.js';
 
-export const getAirlines = async () => {
+const getAirlines = async () => {
     try {
         const airlines = await Airline.find().lean().exec();
         return airlines;
@@ -9,7 +9,7 @@ export const getAirlines = async () => {
     }
 };
 
-export const getAirline = async (id) => {
+const getAirline = async (id) => {
     try {
         const airline = await Airline.findById(id).lean().exec();
         return airline;
@@ -18,7 +18,7 @@ export const getAirline = async (id) => {
     }
 };
 
-export const createAirline = async (airline) => {
+const createAirline = async (airline) => {
     try {
         const newAirline = await Airline.create(airline);
         return newAirline;
@@ -27,7 +27,7 @@ export const createAirline = async (airline) => {
     }
 };
 
-export const updateAirline = async (id, airline) => {
+const updateAirline = async (id, airline) => {
     try {
         const updatedAirline = await Airline.findByIdAndUpdate(id, airline,
             {
@@ -41,7 +41,7 @@ export const updateAirline = async (id, airline) => {
     }
 };
 
-export const deleteAirline = async (id) => {
+const deleteAirline = async (id) => {
     try {
         const deletedAirline = await Airline.findByIdAndDelete(id).exec();
         return deletedAirline;
