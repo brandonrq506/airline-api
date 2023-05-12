@@ -1,6 +1,6 @@
 import gateService from '../services/gate.js';
-import createError from '../helpers/errorHelpers.js'
-import asyncHandler from '../middlewares/asyncHandler.js';
+import createError from '../helpers/errorHelpers.js';
+import asyncHandler from '../middleware/asyncHandler.js';
 
 export const getGates = asyncHandler(async (req, res, next) => {
     const gates = await gateService.getGates();

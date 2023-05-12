@@ -35,6 +35,7 @@ const updateGate = async (id, gate) => {
                 runValidators: true
             }
         ).exec();
+        return newGate;
     } catch (error) {
         throw error;
     }
