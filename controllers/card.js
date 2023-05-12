@@ -7,7 +7,7 @@ export const getCards = asyncHandler(async (req, res, next) => {
     res.status(200).json(cards);
 });
 
-export const getCard = async (req, res, next) => {
+export const getCard = asyncHandler(async (req, res, next) => {
     const cardId = req.params.id;
     const card = await cardService.getCardById(cardId);
 
@@ -15,21 +15,21 @@ export const getCard = async (req, res, next) => {
         return next(createError(404, `Card not found`));
 
     res.status(200).json(card);
-}
+});
 
-export const getCardsByCustomerId = async (req, res, next) => {
+export const getCardsByCustomerId = asyncHandler(async (req, res, next) => {
     const customerId = req.params.id;
     const cards = await cardService.getCardsByCustomerId(customerId);
     res.status(200).json(cards);
-}
+});
 
-export const addCard = async (req, res, next) => {
+export const addCard = asyncHandler(async (req, res, next) => {
     const card = req.body;
     const newCard = await cardService.addCard(card);
     res.status(201).json(newCard);
-}
+});
 
-export const updateCard = async (req, res, next) => {
+export const updateCard = asyncHandler(async (req, res, next) => {
     const cardId = req.params.id;
     const card = req.body;
     const updatedCard = await cardService.updateCard(cardId, card);
@@ -37,12 +37,12 @@ export const updateCard = async (req, res, next) => {
         return next(createError(404, `Card not found`));
 
     res.status(200).json(updatedCard);
-}
+});
 
-export const deleteCard = async (req, res, next) => {
+export const deleteCard = asyncHandler(async (req, res, next) => {
     const cardId = req.params.id;
     const deletedCard = await cardService.deleteCard(cardId);
     if (!deletedCard)
         return next(createError(404, `Card not found`));
     res.sendStatus(200);
-}
+});
