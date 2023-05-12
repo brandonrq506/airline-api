@@ -20,7 +20,7 @@ export const getCountry = asyncHandler(async (req, res, next) => {
 export const createCountry = asyncHandler(async (req, res, next) => {
     const country = req.body;
     const newCountry = await countryService.createCountry(country);
-    res.status(200).json(newCountry);
+    res.status(201).json(newCountry);
 });
 
 export const updateCountry = asyncHandler(async (req, res, next) => {

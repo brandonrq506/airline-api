@@ -1,6 +1,7 @@
 import express from 'express';
 import verifyJwt from '../middleware/verifyJwt.js';
 
+import airlineAirportRoutes from './airline_airport.js'
 import customerRoutes from './customer.js'
 import sessionRoutes from './session.js'
 import countryRoutes from './country.js'
@@ -16,6 +17,7 @@ router.use('/countries', countryRoutes);
 router.use('/airports', airportRoutes);
 router.use('/airlines', airlineRoutes);
 router.use('/gates', gateRoutes);
+router.use('/airline_airports', airlineAirportRoutes);
 
 router.use(verifyJwt);
 router.use('/customers', customerRoutes);
