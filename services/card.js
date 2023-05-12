@@ -54,7 +54,7 @@ const updateCard = async (id, card) => {
 
 const deleteCard = async (id) => {
     try {
-        const card = await Card.findByIdAndDelete(id).exec();
+        const card = await Card.findByIdAndDelete(id).lean().exec();
         return card;
     } catch (error) {
         throw error;
