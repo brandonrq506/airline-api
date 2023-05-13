@@ -16,6 +16,15 @@ export const getRouteById = asyncHandler(async (req, res, next) => {
     res.status(200).json(route);
 });
 
+export const getFareByRouteId = asyncHandler(async (req, res, next) => {
+    const routeId = req.params.id;
+    const fares = await routeService.getFaresByRouteId(routeId);
+    if (!fares)
+        return next(createError(404, `No fares for route with id ${routeId}`));
+
+    res.status(200).json(fares);
+});
+
 export const addRoute = asyncHandler(async (req, res, next) => {
     const route = req.body;
     const newRoute = await routeService.addRoute(route);
