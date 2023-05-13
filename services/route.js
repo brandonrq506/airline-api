@@ -18,6 +18,15 @@ const getRouteById = async (id) => {
     }
 };
 
+const getFaresByRouteId = async (id) => {
+    try {
+        const route = await Route.findById(id).populate('fares').exec();
+        return route.fares;
+    } catch (error) {
+        throw error;
+    }
+};
+
 const addRoute = async (route) => {
     try {
         const newRoute = await Route.create(route);
@@ -53,6 +62,7 @@ const deleteRoute = async (id) => {
 export default {
     getRoutes,
     getRouteById,
+    getFaresByRouteId,
     addRoute,
     updateRoute,
     deleteRoute
