@@ -18,6 +18,15 @@ const getGate = async (id) => {
     }
 };
 
+const getGatesByAirportId = async (airportId) => {
+    try {
+        const gate = await Gate.find({ airport: airportId }).lean().exec();
+        return gate;
+    } catch (error) {
+        throw error;
+    }
+};
+
 const createGate = async (gate) => {
     try {
         const newGate = await Gate.create(gate);
@@ -53,6 +62,7 @@ const deleteGate = async (id) => {
 export default {
     getGates,
     getGate,
+    getGatesByAirportId,
     createGate,
     updateGate,
     deleteGate
