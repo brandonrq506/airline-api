@@ -39,5 +39,5 @@ export const deleteCountry = asyncHandler(async (req, res, next) => {
     if (!deletedCountry)
         return next(createError(404, `Country not found`));
 
-    res.sendStatus(200);
+    res.sendStatus(204);
 });

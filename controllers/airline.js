@@ -38,5 +38,5 @@ export const deleteAirline = asyncHandler(async (req, res, next) => {
     if (!deletedAirline)
         return next(createError(404, `Airline not found with id ${airlineId}`));
 
-    res.sendStatus(200);
+    res.sendStatus(204);
 });

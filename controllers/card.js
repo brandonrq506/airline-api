@@ -42,7 +42,9 @@ export const updateCard = asyncHandler(async (req, res, next) => {
 export const deleteCard = asyncHandler(async (req, res, next) => {
     const cardId = req.params.id;
     const deletedCard = await cardService.deleteCard(cardId);
+
     if (!deletedCard)
         return next(createError(404, `Card not found`));
-    res.sendStatus(200);
+
+    res.sendStatus(204);
 });
