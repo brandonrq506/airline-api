@@ -34,4 +34,6 @@ mongoose.connect(process.env.MONGO_URI)
 /*
 Add customer error message to Schema validation.
 Using Graphs Theory we can introduce layover functionality.
+
+Hide the password and refreshToken from the response.
 */
