@@ -16,6 +16,15 @@ export const getTicketById = asyncHandler(async (req, res, next) => {
     res.status(200).json(ticket);
 });
 
+export const getTicketsByCustomerId = asyncHandler(async (req, res, next) => {
+    const customerId = req.params.id;
+    const tickets = await ticketService.getTicketsByCustomerId(customerId);
+
+    if (!tickets)
+        return next(createError(`Could not find tickets for customer with id of ${customerId}`, 404));
+    res.status(200).json(tickets);
+});
+
 export const createTicket = asyncHandler(async (req, res, next) => {
     const ticket = req.body;
     const newTicket = await ticketService.createTicket(ticket);

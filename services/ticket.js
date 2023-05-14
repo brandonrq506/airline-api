@@ -16,11 +16,25 @@ const getTicketById = async (ticketId) => {
             .populate('customer')
             .populate('route')
             .populate('schedule')
-            .select('-route')
             .exec();
 
         ticket.route.fares = undefined;
         return ticket;
+    } catch (error) {
+        throw error;
+    }
+};
+
+const getTicketsByCustomerId = async (customerId) => {
+    try {
+        const tickets = await Ticket.find({ customer: customerId })
+            .populate('customer')
+            .populate('route')
+            .populate('schedule')
+            .exec();
+
+        tickets.forEach(t => t.route.fares = undefined);
+        return tickets;
     } catch (error) {
         throw error;
     }
@@ -70,6 +84,7 @@ const deleteTicket = async (ticketId) => {
 export default {
     getTickets,
     getTicketById,
+    getTicketsByCustomerId,
     createTicket,
     updateTicket,
     deleteTicket,
