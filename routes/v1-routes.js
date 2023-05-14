@@ -9,6 +9,7 @@ import sessionRoutes from './session.js'
 import countryRoutes from './country.js'
 import airportRoutes from './airport.js'
 import airlineRoutes from './airline.js'
+import ticketRoutes from './ticket.js'
 import routeRoutes from './route.js'
 import gateRoutes from './gate.js';
 import cardRoutes from './card.js'
@@ -26,6 +27,7 @@ router.use('/routes', routeRoutes);
 router.use('/schedules', scheduleRoutes);
 
 router.use(verifyJwt);
+router.use('/tickets', ticketRoutes);
 router.use('/customers', customerRoutes);
 router.use('/cards', cardRoutes);
 
