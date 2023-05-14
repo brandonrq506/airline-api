@@ -35,5 +35,11 @@ mongoose.connect(process.env.MONGO_URI)
 Add customer error message to Schema validation.
 Using Graphs Theory we can introduce layover functionality.
 
-Hide the password and refreshToken from the response.
+
+Schemas:
+Would it been better for 'foreign keys' to be called customerId, instead of customer, routeId instead of route?
+
+Fare: Maybe it was better to have Fare as its own model, and use transactions to create the 4 fares for each route.
+
+Customer: Hide the password and refreshToken from the response. But have methods that allow access from Back-end.
 */
