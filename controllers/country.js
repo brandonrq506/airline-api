@@ -20,6 +20,9 @@ export const getCountry = asyncHandler(async (req, res, next) => {
 export const createCountry = asyncHandler(async (req, res, next) => {
     const country = req.body;
     const newCountry = await countryService.createCountry(country);
+
+    if (!newCountry)
+        return next(createError(400, 'Unable to create country'));
     res.status(201).json(newCountry);
 });
 

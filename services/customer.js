@@ -1,11 +1,12 @@
 import Customer from '../models/Customer.js';
+import createError from '../helpers/errorHelpers.js';
 
 const getAllCustomers = async () => {
     try {
         const customers = await Customer.find().lean().exec();
         return customers;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting customers`, error.message);
     }
 }
 
@@ -14,7 +15,7 @@ const getCustomerById = async (id) => {
         const customer = await Customer.findById(id).exec();
         return customer;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting customerId: ${id}`, error.message);
     }
 }
 
@@ -23,7 +24,7 @@ const getCustomerByEmail = async (email) => {
         const customer = await Customer.findOne({ email: email }).exec();
         return customer;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting customer by email: ${email}`, error.message);
     }
 }
 
@@ -32,7 +33,7 @@ const getCustomerByToken = async (refreshToken) => {
         const customer = await Customer.findOne({ refreshToken: refreshToken }).exec();
         return customer;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting customer by token`, error.message);
     }
 }
 
@@ -41,7 +42,7 @@ const addCustomer = async (customer) => {
         const newCustomer = await Customer.create(customer);
         return newCustomer;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error adding new customer`, error.message);
     }
 }
 
@@ -52,19 +53,19 @@ const updateCustomer = async (id, customer) => {
                 new: true,
                 runValidators: true
             }
-        ).exec();
+        ).lean().exec();
         return newCustomer;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error updating customerId: ${id}`, error.message);
     }
 }
 
 const deleteCustomer = async (id) => {
     try {
-        const customer = await Customer.findByIdAndDelete(id).exec();
+        const customer = await Customer.findByIdAndDelete(id).lean().exec();
         return customer;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error deleting customerId: ${id}`, error.message);
     }
 }
 

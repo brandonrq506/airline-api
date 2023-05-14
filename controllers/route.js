@@ -30,7 +30,7 @@ export const addRoute = asyncHandler(async (req, res, next) => {
     const newRoute = await routeService.addRoute(route);
 
     if (!newRoute)
-        return next(createError(500, `Route could not be created`));
+        return next(createError(400, `Route could not be created`));
 
     res.status(201).json(newRoute);
 });
@@ -41,7 +41,7 @@ export const updateRoute = asyncHandler(async (req, res, next) => {
     const updatedRoute = await routeService.updateRoute(routeId, route);
 
     if (!updatedRoute)
-        return next(createError(500, `Route could not be updated`));
+        return next(createError(404, `Route not found`));
 
     res.status(200).json(updatedRoute);
 });
@@ -52,7 +52,7 @@ export const deleteRoute = asyncHandler(async (req, res, next) => {
     const deletedRoute = await routeService.deleteRoute(routeId);
 
     if (!deletedRoute)
-        return next(createError(500, `Route could not be deleted`));
+        return next(createError(404, `Route not found`));
 
     res.sendStatus(204);
 });

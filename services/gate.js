@@ -1,11 +1,12 @@
 import Gate from '../models/Gate.js';
+import createError from '../helpers/errorHelpers.js';
 
 const getGates = async () => {
     try {
         const gates = await Gate.find().lean().exec();
         return gates;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting gates `, error.message);
     }
 };
 
@@ -14,7 +15,7 @@ const getGate = async (id) => {
         const gate = await Gate.findById(id).lean().exec();
         return gate;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting gateId: ${id}`, error.message);
     }
 };
 
@@ -23,7 +24,7 @@ const getGatesByAirportId = async (airportId) => {
         const gate = await Gate.find({ airport: airportId }).lean().exec();
         return gate;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting gates by airportId: ${airportId}`, error.message);
     }
 };
 
@@ -32,7 +33,7 @@ const createGate = async (gate) => {
         const newGate = await Gate.create(gate);
         return newGate;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error adding new gate`, error.message);
     }
 };
 
@@ -43,10 +44,10 @@ const updateGate = async (id, gate) => {
                 new: true,
                 runValidators: true
             }
-        ).exec();
+        ).lean().exec();
         return newGate;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error updating gateId: ${id}`, error.message);
     }
 };
 
@@ -55,7 +56,7 @@ const deleteGate = async (id) => {
         const gate = await Gate.findByIdAndDelete(id).lean().exec();
         return gate;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error deleting dateId: ${id}`, error.message);
     }
 };
 

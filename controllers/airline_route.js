@@ -30,7 +30,7 @@ export const deleteAirlineFromRoute = asyncHandler(async (req, res, next) => {
     const airline_route = await airline_routeService.deleteAirline_Routes(airlineId, routeId);
 
     if (!airline_route)
-        return next(createError(400, 'Unable to delete airline from route'));
+        return next(createError(404, 'Unable to delete airline from route'));
 
     res.sendStatus(204);
 });

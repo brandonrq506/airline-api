@@ -32,7 +32,7 @@ export const addSchedule = asyncHandler(async (req, res, next) => {
     const newSchedule = await scheduleService.addSchedule(schedule);
 
     if (!newSchedule)
-        return next(createError(400, `Schedule not created`));
+        return next(createError(400, `Unable to create schedule`));
 
     res.status(201).json(newSchedule);
 });
