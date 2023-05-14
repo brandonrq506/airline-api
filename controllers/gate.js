@@ -17,6 +17,12 @@ export const getGate = asyncHandler(async (req, res, next) => {
     res.status(200).json(gate);
 });
 
+export const getGateByAirportId = asyncHandler(async (req, res, next) => {
+    const airportId = req.params.id;
+    const gates = await gateService.getGatesByAirportId(airportId);
+    res.status(200).json(gates);
+});
+
 export const createGate = asyncHandler(async (req, res, next) => {
     const gate = req.body;
     const newGate = await gateService.createGate(gate);
