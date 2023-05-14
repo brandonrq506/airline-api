@@ -2,6 +2,7 @@ import express from 'express';
 import verifyJwt from '../middleware/verifyJwt.js';
 
 import airlineAirportRoutes from './airline_airport.js'
+import airlineRouteRoutes from './airline_route.js'
 import customerRoutes from './customer.js'
 import scheduleRoutes from './schedule.js'
 import sessionRoutes from './session.js'
@@ -14,12 +15,13 @@ import cardRoutes from './card.js'
 
 const router = express.Router();
 
+router.use('/airlines', airlineRoutes);
+router.use('/airline_airports', airlineAirportRoutes);
+router.use('/airline_routes', airlineRouteRoutes)
+router.use('/airports', airportRoutes);
 router.use('/auth', sessionRoutes);
 router.use('/countries', countryRoutes);
-router.use('/airports', airportRoutes);
-router.use('/airlines', airlineRoutes);
 router.use('/gates', gateRoutes);
-router.use('/airline_airports', airlineAirportRoutes);
 router.use('/routes', routeRoutes);
 router.use('/schedules', scheduleRoutes);
 
