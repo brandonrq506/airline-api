@@ -33,5 +33,5 @@ export const deleteCustomer = asyncHandler(async (req, res, next) => {
     if (!deletedCustomer)
         return next(createError(404, `Customer not found`));
 
-    res.sendStatus(200);
+    res.sendStatus(204);
 });

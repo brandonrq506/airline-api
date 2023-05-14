@@ -45,5 +45,5 @@ export const deleteGate = asyncHandler(async (req, res, next) => {
     if (!deletedGate)
         return next(createError(404, `Gate not found`));
 
-    res.status(200).json(deletedGate);
+    res.sendStatus(204);
 });

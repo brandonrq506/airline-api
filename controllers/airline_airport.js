@@ -32,5 +32,5 @@ export const deleteAirlineFromAirport = asyncHandler(async (req, res, next) => {
     if (!airline_airport)
         return next(createError(400, 'Unable to delete airline from airport'));
 
-    res.status(200).json(airline_airport);
+    res.sendStatus(204);
 });

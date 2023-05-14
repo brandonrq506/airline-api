@@ -45,5 +45,5 @@ export const deleteAirport = asyncHandler(async (req, res, next) => {
     if (!deletedAirport)
         return next(createError(404, `Airport not found`));
 
-    res.sendStatus(200);
+    res.sendStatus(204);
 });
