@@ -26,6 +26,9 @@ export const getAirportsbyCountryId = asyncHandler(async (req, res, next) => {
 export const createAirport = asyncHandler(async (req, res, next) => {
     const airport = req.body;
     const newAirport = await airportService.createAirport(airport);
+
+    if (!newAirport)
+        return next(createError(400, `Unable to create airport`));
     res.status(201).json(newAirport);
 });
 

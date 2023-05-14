@@ -19,6 +19,9 @@ export const getAirline = asyncHandler(async (req, res, next) => {
 export const createAirline = asyncHandler(async (req, res, next) => {
     const airline = req.body;
     const newAirline = await airlineService.createAirline(airline);
+
+    if (!newAirline)
+        return next(createError(400, 'Unable to create airline'));
     res.status(201).json(newAirline);
 });
 

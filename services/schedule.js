@@ -1,30 +1,31 @@
 import Schedule from "../models/Schedule.js";
 import Route from "../models/Route.js";
+import createError from '../helpers/errorHelpers.js';
 
 const getSchedules = async () => {
     try {
-        const schedules = await Schedule.find().exec();
+        const schedules = await Schedule.find().lean().exec();
         return schedules;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting schedules `, error.message);
     }
 };
 
 const getScheduleById = async (id) => {
     try {
-        const schedule = await Schedule.findById(id).exec();
+        const schedule = await Schedule.findById(id).lean().exec();
         return schedule;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting scheduleId: ${id}`, error.message);
     }
 };
 
 const getScheduleByRouteId = async (id) => {
     try {
-        const schedule = await Schedule.find({ route: id }).exec();
+        const schedule = await Schedule.find({ route: id }).lean().exec();
         return schedule;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting schedule by routeId: ${id}`, error.message);
     }
 };
 
@@ -47,7 +48,7 @@ const addSchedule = async (schedule) => {
 
         return newSchedule;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error adding schedule`, error.message);
     }
 };
 
@@ -58,19 +59,19 @@ const updateSchedule = async (id, schedule) => {
                 new: true,
                 runValidators: true
             }
-        ).exec();
+        ).lean().exec();
         return newSchedule;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error updating schedule`, error.message);
     }
 };
 
 const deleteSchedule = async (id) => {
     try {
-        const schedule = await Schedule.findByIdAndDelete(id).exec();
+        const schedule = await Schedule.findByIdAndDelete(id).lean().exec();
         return schedule;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error deleting schedule`, error.message);
     }
 };
 

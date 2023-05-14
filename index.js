@@ -32,6 +32,12 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.log(err));
 
 /*
+Features to add:
+- Role-based access control.
+- Logger file (request, error).
+
+
+
 Add customer error message to Schema validation.
 Using Graphs Theory we can introduce layover functionality.
 
@@ -40,6 +46,9 @@ Schemas:
 Would it been better for 'foreign keys' to be called customerId, instead of customer, routeId instead of route?
 
 Fare: Maybe it was better to have Fare as its own model, and use transactions to create the 4 fares for each route.
+Fare does not update when route price is updated.
+
+Schedule: Departure must be earlier than arrival
 
 Customer: Hide the password and refreshToken from the response. But have methods that allow access from Back-end.
 */

@@ -26,6 +26,9 @@ export const getCardsByCustomerId = asyncHandler(async (req, res, next) => {
 export const addCard = asyncHandler(async (req, res, next) => {
     const card = req.body;
     const newCard = await cardService.addCard(card);
+
+    if (!newCard)
+        return next(createError(400, 'Unable to create card'));
     res.status(201).json(newCard);
 });
 

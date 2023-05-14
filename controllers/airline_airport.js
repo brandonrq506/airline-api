@@ -30,7 +30,7 @@ export const deleteAirlineFromAirport = asyncHandler(async (req, res, next) => {
     const airline_airport = await Airline_Airport.deleteAirline_Airport(airlineId, airportId);
 
     if (!airline_airport)
-        return next(createError(400, 'Unable to delete airline from airport'));
+        return next(createError(404, 'Unable to delete airline from airport'));
 
     res.sendStatus(204);
 });

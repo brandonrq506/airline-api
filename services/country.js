@@ -1,11 +1,12 @@
 import Country from "../models/Country.js";
+import createError from '../helpers/errorHelpers.js';
 
 const getAllCountries = async () => {
     try {
         const countries = await Country.find().lean().exec();
         return countries;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting countries `, error.message);
     }
 };
 
@@ -14,7 +15,7 @@ const getCountryById = async (countryId) => {
         const country = await Country.findById(countryId).lean().exec();
         return country;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error getting countryId: ${id}`, error.message);
     }
 };
 
@@ -23,7 +24,7 @@ const createCountry = async (country) => {
         const newCountry = await Country.create(country);
         return newCountry;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error adding new country`, error.message);
     }
 };
 
@@ -34,19 +35,19 @@ const updateCountry = async (countryId, country) => {
                 new: true,
                 runValidators: true
             }
-        ).exec();
+        ).lean().exec();
         return newCountry;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error updating countryId: ${id}`, error.message);
     }
 };
 
 const deleteCountry = async (countryId) => {
     try {
-        const country = await Country.findByIdAndRemove(countryId).exec();
+        const country = await Country.findByIdAndRemove(countryId).lean().exec();
         return country;
     } catch (error) {
-        throw error;
+        throw createError(500, `Error deleting countryId: ${id}`, error.message);
     }
 };
 
