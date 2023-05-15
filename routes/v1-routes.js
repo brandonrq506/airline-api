@@ -1,5 +1,4 @@
 import express from 'express';
-import verifyJwt from '../middleware/verifyJwt.js';
 
 import airlineAirportRoutes from './airline_airport.js'
 import airlineRouteRoutes from './airline_route.js'
@@ -26,7 +25,6 @@ router.use('/gates', gateRoutes);
 router.use('/routes', routeRoutes);
 router.use('/schedules', scheduleRoutes);
 
-router.use(verifyJwt);
 router.use('/customers', customerRoutes);
 router.use('/tickets', ticketRoutes);
 router.use('/cards', cardRoutes);
