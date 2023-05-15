@@ -27,8 +27,8 @@ router.use('/routes', routeRoutes);
 router.use('/schedules', scheduleRoutes);
 
 router.use(verifyJwt);
-router.use('/tickets', ticketRoutes);
 router.use('/customers', customerRoutes);
+router.use('/tickets', ticketRoutes);
 router.use('/cards', cardRoutes);
 
 export default router;

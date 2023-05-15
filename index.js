@@ -59,7 +59,9 @@ TODO:
 - Role-based access control.
     - Have create of Customer, Ticket and Card be handled by normal users
     - Have left Update, Create and Delete operations only by editos/Administrators.
+- User-based deleting/updating. Users can affect their own data, but not others.
 - Apply rate limiting to session routes, specifically register, refresh and login.
 - Caching
 - How to paginate information?
+- Testing
 */
