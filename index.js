@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import helmet from "helmet";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 3500;
 
 
 //Middlewares
+app.use(helmet());
 app.use(logger);
 app.use(credentials); //Use before CORS
 app.use(cors(corsOptions));
