@@ -55,8 +55,6 @@ Customer:
 -. Add cascade delete. So delete all cards and tickets when deleting customer from DB.
 
 TODO:
-- Apply rate limiting to session routes, specifically register, refresh and login.
-- Caching
 - How to paginate information?
 - Testing
 */
