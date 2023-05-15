@@ -3,7 +3,7 @@ import createError from "../helpers/errorHelpers.js";
 
 const verifyJWT = (req, res, next) => {
     const authHeader = req.headers.authorization || req.headers.Authorization;
-    if (!authHeader)
+    if (!authHeader?.startsWith('Bearer '))
         return next(createError(401, 'No Authorization header'));
 
     const token = authHeader.split(' ')[1];
@@ -11,7 +11,7 @@ const verifyJWT = (req, res, next) => {
         token,
         process.env.ACCESS_TOKEN,
         (err, user) => {
-            if (err)
+            if (err) 
                 return next(createError(403, 'Invalid token'));
 
             req.email = user.email;
