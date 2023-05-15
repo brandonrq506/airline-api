@@ -63,7 +63,7 @@ export const refresh = asyncHandler(async (req, res, next) => {
     Jwt.verify(
         cookies.jwt,
         process.env.REFRESH_TOKEN,
-        async (err, decoded) => {
+        async (err, _) => {
             if (err)
                 return next(createError(403, 'Forbidden'));
 
