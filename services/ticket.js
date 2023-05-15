@@ -48,7 +48,6 @@ const getTicketsByCustomerId = async (customerId) => {
 const createTicket = async (ticket) => {
     try {
         const route = await routeService.getRouteById(ticket.route);
-        console.log(route)
         const fare = route.fares.id(ticket.fare);
         const fareTicket = {
             ...ticket,
