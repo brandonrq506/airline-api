@@ -38,11 +38,10 @@ mongoose.connect(process.env.MONGO_URI)
 /*
 Features to add:
 - Role-based access control.
-- Logger file (request, error).
 
 
 
-Add customer error message to Schema validation.
+Add custom error message to Schema validation.
 Using Graphs Theory we can introduce layover functionality.
 
 
@@ -55,4 +54,12 @@ Fare does not update when route price is updated.
 Schedule: Departure must be earlier than arrival
 
 Customer: Hide the password and refreshToken from the response. But have methods that allow access from Back-end.
+
+TODO:
+- Role-based access control.
+    - Have create of Customer, Ticket and Card be handled by normal users
+    - Have left Update, Create and Delete operations only by editos/Administrators.
+- Apply rate limiting to session routes, specifically register, refresh and login.
+- Caching
+- How to paginate information?
 */
