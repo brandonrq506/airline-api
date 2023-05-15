@@ -3,6 +3,7 @@ import credentials from './middleware/credentials.js'
 import v1Routes from "./routes/v1-routes.js";
 import { corsOptions } from "./config/cors.js";
 import cookieParser from "cookie-parser";
+import { logger } from "./middleware/logger.js";
 import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3500;
 
 
 //Middlewares
+app.use(logger);
 app.use(credentials); //Use before CORS
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
